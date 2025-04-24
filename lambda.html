@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lambda interpreter</title>
+	<link rel="icon" href="icon.png" type="image/png">
+    <link rel="stylesheet" href="lambda.css">
+	<script src="lambda.js"></script>
+	<script src="parsing.js"></script>
+	<script src="reducing.js"></script>
+	<script src="define.js"></script>
+</head>
+<body>
+	<h1 class="orangeTitle">Lambda interpreter</h1>
+	<textarea wrap="soft" class="orangeInput orangeScrollable" style="margin-top: 10px; width: 90%; max-height: 8%; height: 8%;" placeholder="Type an expression (e.g. /a./b.a) here..."></textarea>
+	
+	<div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
+		<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+			<label for="churchToggle">Replace numbers with Church numerals:</label>
+			<input type=checkbox class="orangeCheckbox" id="churchToggle" checked>
+		</div>
+		<button class="orangeButton" id="startButton">Start</button>
+	</div>
+	
+	<div class="orangeReadonlyBox orangeScrollable" style="height: 45vh; max-height: 45vh; overflow-y: auto; width: 90%; min-height: 30px;"></div>
+	<div style="display: flex; justify-content: center; gap: 30px;">
+		<button class="orangeButton" id="nextButton">Reduce next</button>
+		<button class="orangeButton" id="runButton">Reduce all</button>
+	</div>
+	
+	<button class="smallButton" style="position: fixed; top: 10px; right: 10px;" title="Help" id="openHelpButton">?</button>
+	<button class="smallButton" style="position: fixed; top: 10px; left: 10px;" title="Define" id="openDefineButton">#</button>
+	
+	<div class="panelRight" id="helpPanel">
+		<div class="panelContent orangeScrollable">
+			<h1 class="orangeTitle">Help</h1>
+			<h3 class="orangeTitle">Parsing</h3>
+			<p style="text-align: left;">You can write lambda expressions in the input box.</p>
+			<p style="text-align: left;">Variable names are lowercase letters and may be followed by a number 0-9 (a, b, a0, w8)</p>
+			<p style="text-align: left;">Functions can be written with \ or / instead of λ and there is support for multiple arguments: /ab.a is the same as /a./b.a</p>
+			<p style="text-align: left;">Applications must be written between (). Also, there can be more than two arguments: (a b a b c) is the same as ((((a b) a) b) c). This is the left to right priority</p>
+			<p style="text-align: left;">Another type of applications is written between []. This is the right to left priority: [a b a b c] is the same as (a (b (a (b c))))</p>
+			<p style="text-align: left;">If enabled, numbers(in decimal base) will be transformed to their Church encoding counterpart.</p>
+			<br>
+			<h3 class="orangeTitle">Reducing</h3>
+			<p style="text-align: left;">Once you have written an expression and it has been parsed, you can β-reduce it</p>
+			<p style="text-align: left;">You can β-reduce it a single step or as many as needed to achive the β-normal form</p>
+			<p style="text-align: left;">Be careful because the last option can not be stopped, so if an expression does not have a β-normal form, it will fun forever</p>
+			<p style="text-align: left;">Reduced forms will not retain the name sof the variables and will use the earliest possible, maybe even longer than one charachter. This is only a way of representing it</p>
+			<p style="text-align: left;">Reduced forms will show unbound variables as U + a number</p>
+			<br>
+			<h3 class="orangeTitle">Defining</h3>
+			<p style="text-align: left;">You can define useful functions in the define menu. Then, you can use them by preceding the # symbol to the name (for example #add)</p>
+			<br>
+			<h3 class="orangeTitle">Interal operation</h3>
+			<p style="text-align: left;">Internally, this interpreter works with De Bruijn indexing. Thats the reason why there is no name retention</p>
+		</div>
+		<button class="orangeButton" id="closeHelpButton">Close</button>
+	</div>
+	
+	<div class="panelLeft" id="definePanel">
+		<div class="panelContent orangeScrollable">
+			<h1 class="orangeTitle">Definitions</h1>
+			<div id="defineContainer">
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="true"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λab.a"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="false"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λab.b"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="and"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λab.(a b a)"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="or"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λab.(a a b)"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="not"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λa.(a #false #true)"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="succ"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λnfx.(f (n f x))"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="sum"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λnmfx.((n f) (m f x))"></input>
+				</div>
+			</div>
+			<button class="smallButton" title="Add" id="addDefineButton">+</button>
+		</div>
+		<button class="orangeButton" id="closeDefineButton">Close</button>
+	</div>
+	
+</body>

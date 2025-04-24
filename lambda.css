@@ -1,0 +1,218 @@
+body{
+	font-family: Arial, sans-serif;
+	margin: 20px;
+	padding: 5px;
+	text-align: center;
+	background-color: #161616;
+	color: white;
+}
+
+.orangeTitle{
+	color: #AA5C29;
+}
+
+.orangeInput{
+	padding: 10px;
+	color: white;
+	background-color: #333;
+	border: 2px solid #565656;
+	border-radius: 10px;
+	outline: 2px solid transparent;
+	resize: none;
+	transition: background-color 0.2s ease, border-color 0.2s ease, outline 0.2s ease;
+}
+.orangeInput:hover{
+	background-color: #565656;
+	cursor: text;
+	border: 2px solid #828282;
+}
+.orangeInput:focus{
+	outline: 2px solid #BBBBBB;
+}
+
+.orangeScrollable::-webkit-scrollbar {
+	width: 10px;
+	height: 12px;
+}
+.orangeScrollable::-webkit-scrollbar-thumb {
+	background-color: #875330; /* Thumb color */
+	border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+	border: 3px solid #161616; /* Border around the thumb to create separation */
+	transition: background-color 0.2s ease;
+}
+.orangeScrollable::-webkit-scrollbar-track {
+	background: transparent; /* Background of the track */
+	border-radius: 10px; /* Rounded corners for the track */
+}
+.orangeScrollable::-webkit-scrollbar-thumb:hover {
+	background-color: #AA5C29; /* Change color when hovered */
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+
+.orangeButton{
+	padding: 10px;
+	margin-top: 20px;
+	width: 30%;
+	color: white;
+	background-color: #875330;
+	border: 2px solid #753F1C;
+	border-radius: 10px;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.orangeButton:hover{
+	background-color: #AA5C29;
+	cursor: pointer;
+	border: 2px solid #843D11;
+}
+.orangeButton.green {
+	background-color: #60C611;
+	border-color: #4C990D;
+}
+.orangeButton.red {
+	background-color: #BC301E;
+	border-color: #8E261B;
+}
+
+.orangeReadonlyBox {
+	font-family: Consolas;
+	display: block;
+	text-align: left;
+	padding: 10px;
+	margin: 20px auto;
+	color: white;
+	background-color: #222;
+	border: 2px solid #565656;
+	border-radius: 10px;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.orangeReadonlyBox:hover{
+	background-color: #333;
+	cursor: text;
+}
+
+.smallButton{
+	width: 40px;
+    height: 40px;
+	font-size: 20px;
+	font-family: Consolas;
+	text-align: center;
+	border-radius: 10px;
+	color: white;
+	background-color: #222;
+	border: 2px solid #565656;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.smallButton:hover{
+	background-color: #333;
+	cursor: pointer;
+}
+
+.panelRight {
+    position: fixed;
+    top: 0;
+    right: -35%; /* Initially off-screen */
+    width: 30%;
+    height: 100%;
+    background-color: #161616;
+	border-left: 2px solid #363636;
+    box-shadow: -4px 0 10px #000000A0;
+    z-index: 1001;
+    transition: right 0.3s ease-in-out; /* Smooth sliding animation */
+}
+
+.panelLeft {
+    position: fixed;
+    top: 0;
+    left: -35%; /* Initially off-screen */
+    width: 30%;
+    height: 100%;
+    background-color: #161616;
+	border-right: 2px solid #363636;
+    box-shadow: -4px 0 10px #000000A0;
+    z-index: 1001;
+    transition: left 0.3s ease-in-out; /* Smooth sliding animation */
+}
+
+.panelContent {
+    padding: 20px;
+	height: 85%;
+	overflow-y: auto;
+}
+
+.definePocket{
+	height: auto;
+	/* width: 90%; */
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	
+	opacity: 0;
+	transform: translateY(-10px);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.definePocket.show{
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.defineName{
+	width: 35%;
+	height: 90%;
+}
+
+.defineDef{
+	width: 50%;
+	height: 90%;
+}
+
+input[type="checkbox"].orangeCheckbox {
+	appearance: none; /* Removes default styling */
+	width: 45px;
+	height: 20px;
+	background-color: #333;
+	border: 2px solid #565656;
+	cursor: pointer;
+	position: relative;
+	border-radius: 5px;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+input[type="checkbox"].orangeCheckbox:hover{
+	background-color: #565656;
+	border-color: #828282;
+}
+input[type="checkbox"].orangeCheckbox:checked {
+	background-color: #875330;
+	border-color: #753F1C;
+}
+input[type="checkbox"].orangeCheckbox:checked:hover{
+	background-color: #AA5C29;
+	border-color: #843D11;
+}
+input[type="checkbox"].orangeCheckbox::before {
+	content: "";
+	display: block;
+	width: 10px;
+	height: 10px;
+	border-radius: 3px;
+	background-color: #565656;
+	position: absolute;
+	top: 50%;
+	left: 4px;
+	transform: translateY(-50%);
+	transition: background-color 0.2s ease, left 0.2s ease;
+}
+input[type="checkbox"].orangeCheckbox:hover::before{
+	background-color: #828282;
+}
+input[type="checkbox"].orangeCheckbox:checked::before {
+	background-color: #AA5C29;
+	position: absolute;
+	top: 50%;
+	left: 29px;
+	transform: translateY(-50%);
+}
+input[type="checkbox"].orangeCheckbox:checked:hover::before{
+	background-color: #843D11;
+}
