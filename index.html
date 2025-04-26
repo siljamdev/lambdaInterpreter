@@ -56,6 +56,8 @@
 			<br>
 			<h3 class="orangeTitle">Defining</h3>
 			<p style="text-align: left;">You can define useful functions in the define menu. Then, you can use them by preceding the # symbol to the name (for example #add)</p>
+			<p style="text-align: left;">The definitions should be entirely self-contained and independent, because thats how they will be parsed</p>
+			<p style="text-align: left;">There are some pre-defined functions, used with boolean logic and basic arithmetic</p>
 			<br>
 			<h3 class="orangeTitle">Interal operation</h3>
 			<p style="text-align: left;">Internally, this interpreter works with <a href="https://en.wikipedia.org/wiki/De_Bruijn_index" class="orangeLink">De Bruijn indexing</a>. Thats the reason why there is no name retention</p>
@@ -94,6 +96,10 @@
 				<div class="orangeReadonlyBox definePocket.show">
 					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="sum"></input>
 					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λnmfx.((n f) (m f x))"></input>
+				</div>
+				<div class="orangeReadonlyBox definePocket.show">
+					<input type=text class="orangeInput defineName" oninput="ensureOnlyLetters(this);" placeholder="Name" value="mult"></input>
+					<input type=text class="orangeInput defineDef" placeholder="Definition" value="λnmf.[n m f])"></input>
 				</div>
 			</div>
 			<button class="smallButton" title="Add" id="addDefineButton">+</button>

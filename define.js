@@ -12,7 +12,12 @@ function getDefined(){
 }
 
 function getValue(name){
-	return defined.find(c => c.name === name)?.definition || "";
+	const match = defined.find(c => c.name === name);
+	if (match) {
+		return match.definition;
+	} else {
+		throw new Error("Definition not found: " + name);
+	}
 }
 
 function isThereAnyEmpty(){

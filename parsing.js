@@ -197,16 +197,15 @@ function parseLambdaIndex(expression, startPos, names){
 	
 	if(c === '#'){
 		const { result: name, newIndex: newI } = parseLetters(expression, i + 1);
+		i = newI;
+		
 		const value = getValue(name);
-		
-		expression = expression.replace("#" + name, value);
-		const { result: expr, newIndex: newI2 } = parseLambdaIndex(expression, i, names);
-		
-		const j = newI2 - i - value.length;
-		
-		i = newI + j;
-		
-		return {result: expr, newIndex: i};
+		try{
+			const { result: expr, newIndex: newI2 } = parseLambdaIndex(value, 0, names);
+			return {result: expr, newIndex: i};
+		}catch(e){
+			throw new Error("Error parsing definition of " + name + ":<br>" + e);
+		}
 	}
 	
 	throw new Error("Unknown charachter");

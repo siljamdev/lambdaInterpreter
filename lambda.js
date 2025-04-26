@@ -29,12 +29,6 @@ document.addEventListener("DOMContentLoaded", function (){
 	const maxHeight = window.innerHeight * 0.25;
 	input.style.height = Math.min(input.scrollHeight, maxHeight) + "px";
 	
-	input.addEventListener("input", function () {
-		//this.style.height = "auto"; // Reset height to recalculate
-		//const maxHeight = window.innerHeight * 0.08; // 8% of viewport height
-		//this.style.height = Math.min(this.scrollHeight, maxHeight) + "px"; // Set height within limit
-	});
-	
 	input.addEventListener("keydown", function(e) {
 		if(/[^a-zA-Z0-9.#λ\/\\()=\[\]\s]/.test(e.key)){
 			e.preventDefault();
@@ -201,6 +195,8 @@ document.addEventListener("DOMContentLoaded", function (){
 		
 		// Add the 'show' class to trigger the animation
 		p.classList.add("show");
+		
+		defineContainer.parentElement.scrollTop = defineContainer.parentElement.scrollHeight;
 	});
 });
 
