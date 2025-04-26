@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function (){
 	});
 	
 	addDefineButton.addEventListener("click", function () {
-		if(parsing){
+		if(parsing || isThereAnyEmpty()){
 			return;
 		}
 		const p = document.createElement("div");
@@ -218,19 +218,23 @@ function ensureOnlyLetters(v){
 function openHelpPanel(){
 	closeDefinePanel();
 	helpPanel.style.right = "0px";
+	helpPanel.style.opacity = "1";
 }
 
 function closeHelpPanel(){
-	helpPanel.style.right = "-35%";
+	helpPanel.style.right = (-Math.max(window.innerWidth * 0.45, 510)) + "px";
+	setTimeout(() => {helpPanel.style.opacity = "0";}, 300);
 }
 
 function openDefinePanel(){
 	closeHelpPanel();
 	definePanel.style.left = "0px";
+	definePanel.style.opacity = "1";
 }
 
 function closeDefinePanel(){
-	definePanel.style.left = "-35%";
+	definePanel.style.left = (-Math.max(window.innerWidth * 0.45, 510)) + "px";
+	setTimeout(() => {definePanel.style.opacity = "0";}, 300);
 }
 
 let evaluating = false;

@@ -13,7 +13,7 @@
 </head>
 <body>
 	<h1 class="orangeTitle">Lambda interpreter</h1>
-	<textarea wrap="soft" class="orangeInput orangeScrollable" style="margin-top: 10px; width: 90%; max-height: 8%; height: 8%;" placeholder="Type an expression (e.g. /a./b.a) here..."></textarea>
+	<textarea wrap="soft" class="orangeInput orangeScrollable" style="margin-top: 10px; width: 95%; max-height: 8%; height: 8%;" placeholder="Type an expression (e.g. /a./b.a) here..."></textarea>
 	
 	<div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 10px;">
 		<div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
@@ -23,7 +23,7 @@
 		<button class="orangeButton" id="startButton">Start</button>
 	</div>
 	
-	<div class="orangeReadonlyBox orangeScrollable" style="height: 45vh; max-height: 45vh; overflow-y: auto; width: 90%; min-height: 30px;"></div>
+	<div class="orangeReadonlyBox orangeScrollable" style="height: 45vh; max-height: 45vh; overflow-y: auto; width: 95%; min-height: 30px;"></div>
 	<div style="display: flex; justify-content: center; gap: 30px;">
 		<button class="orangeButton" id="nextButton">Reduce next</button>
 		<button class="orangeButton" id="runButton">Reduce all</button>
@@ -31,6 +31,10 @@
 	
 	<button class="smallButton" style="position: fixed; top: 10px; right: 10px;" title="Help" id="openHelpButton">?</button>
 	<button class="smallButton" style="position: fixed; top: 10px; left: 10px;" title="Define" id="openDefineButton">#</button>
+	
+	<a href="https://github.com/siljamdev/lambdainterpreter">
+		<img style="position: fixed; top: 10px; right: 60px; width: 40px; height: 40px;" src="github.png" alt="GitHub repo">
+	</a>
 	
 	<div class="panelRight" id="helpPanel">
 		<div class="panelContent orangeScrollable">
@@ -41,22 +45,22 @@
 			<p style="text-align: left;">Functions can be written with \ or / instead of λ and there is support for multiple arguments: /ab.a is the same as /a./b.a</p>
 			<p style="text-align: left;">Applications must be written between (). Also, there can be more than two arguments: (a b a b c) is the same as ((((a b) a) b) c). This is the left to right priority</p>
 			<p style="text-align: left;">Another type of applications is written between []. This is the right to left priority: [a b a b c] is the same as (a (b (a (b c))))</p>
-			<p style="text-align: left;">If enabled, numbers(in decimal base) will be transformed to their Church encoding counterpart.</p>
+			<p style="text-align: left;">If enabled, numbers(in decimal base) will be transformed to their <a href="https://en.wikipedia.org/wiki/Church_encoding" class="orangeLink">Church encoding</a> counterpart.</p>
 			<br>
 			<h3 class="orangeTitle">Reducing</h3>
-			<p style="text-align: left;">Once you have written an expression and it has been parsed, you can β-reduce it</p>
+			<p style="text-align: left;">Once you have written an expression and it has been parsed, you can <a href="https://en.wikipedia.org/wiki/Lambda_calculus#%CE%B2-reduction_2" class="orangeLink">β-reduce</a> it</p>
 			<p style="text-align: left;">You can β-reduce it a single step or as many as needed to achive the β-normal form</p>
 			<p style="text-align: left;">Be careful because the last option can not be stopped, so if an expression does not have a β-normal form, it will fun forever</p>
-			<p style="text-align: left;">Reduced forms will not retain the name sof the variables and will use the earliest possible, maybe even longer than one charachter. This is only a way of representing it</p>
+			<p style="text-align: left;">Reduced forms will not retain the names of the variables and will use the earliest possible, maybe even longer than one charachter. This is only a way of representing it</p>
 			<p style="text-align: left;">Reduced forms will show unbound variables as U + a number</p>
 			<br>
 			<h3 class="orangeTitle">Defining</h3>
 			<p style="text-align: left;">You can define useful functions in the define menu. Then, you can use them by preceding the # symbol to the name (for example #add)</p>
 			<br>
 			<h3 class="orangeTitle">Interal operation</h3>
-			<p style="text-align: left;">Internally, this interpreter works with De Bruijn indexing. Thats the reason why there is no name retention</p>
+			<p style="text-align: left;">Internally, this interpreter works with <a href="https://en.wikipedia.org/wiki/De_Bruijn_index" class="orangeLink">De Bruijn indexing</a>. Thats the reason why there is no name retention</p>
 		</div>
-		<button class="orangeButton" id="closeHelpButton">Close</button>
+		<button class="orangeButton" style="margin-left: auto; margin-right: auto;" id="closeHelpButton">Close</button>
 	</div>
 	
 	<div class="panelLeft" id="definePanel">
@@ -94,7 +98,7 @@
 			</div>
 			<button class="smallButton" title="Add" id="addDefineButton">+</button>
 		</div>
-		<button class="orangeButton" id="closeDefineButton">Close</button>
+		<button class="orangeButton" style="margin-left: auto; margin-right: auto;" id="closeDefineButton">Close</button>
 	</div>
 	
 </body>

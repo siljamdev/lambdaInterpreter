@@ -14,3 +14,8 @@ function getDefined(){
 function getValue(name){
 	return defined.find(c => c.name === name)?.definition || "";
 }
+
+function isThereAnyEmpty(){
+	getDefined();
+	return defined.some(c => c.name === "");
+}
